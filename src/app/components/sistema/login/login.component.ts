@@ -20,23 +20,19 @@ export class LoginComponent {
 
   logar() {
     this.loginService.logar(this.login).subscribe({
-      next: user => { 
+      next: (user) => {
         console.log(user);
+        console.log('Token do usuário:', user.token);
         this.loginService.addToken(user.token);
         this.roteador.navigate(['admin/produtos']);
       },
-      error: erro => { 
-        alert('Exemplo de tratamento de erro/exception! Observe o erro no console!');
+      error: (erro) => {
+        alert(
+          'Exemplo de tratamento de erro/exception! Observe o erro no console!'
+        );
         console.error(erro);
-      }
+      },
     });
-
-
-    if (this.login.username == 'admin' && this.login.password == 'admin')
-      this.roteador.navigate(['admin/produtos']);
-    else
-      alert('login ou senha incorretos');
-
   }
 
 
